@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .product-card {
+                border: 1px solid grey;
+                padding: 20px;
+                border-radius: 5px;
+                text-align: center;
+                background-color: white;
+            }   
+            
+            .product-card img {
+                max-width: 100%;
+                height: auto;
+                max-height: 200px;
+                border-radius: 5px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                background-color: red;
+                color: white;
+                border: none;
+                border-radius: 5px;   
+            }
+            
+            .btn:hover {
+                background-color: darkred;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="main.html" class="btn product-card">Trang chủ</a>
+        <button class="btn my-4" onclick="moModal()">Thêm sản phẩm</button>
+        <div class="container">
+            <h2>Danh sách Sản phẩm</h2>
+            <div id="sanpham" class="row">
+            </div>
+        </div>
+
+        <div class="modal fade" id="sanphamModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm/Sửa Sản phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="sanphamForm">
+                            <input type="hidden" id="sanphamId">
+                            <div class="form-group">
+                                <label for="ten">Tên sản phẩm</label>
+                                <input type="text" class="form-control" id="ten" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mota">Mô tả</label>
+                                <input type="text" class="form-control" id="mota" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gia">Giá</label>
+<input type="number" class="form-control" id="gia" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="thuonghieu">Thương hiệu</label>
+                                <input type="text" class="form-control" id="thuonghieu" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="danhgia">Đánh giá</label>
+                                <input type="number" class="form-control" id="danhgia" min="1" max="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="numReviews">Số lượt đánh giá</label>
+                                <input type="number" class="form-control" id="numReviews" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="anh">Link ảnh</label>
+                                <input type="text" class="form-control" id="anh" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                taiLaiSanPham();
+            });
+
+            function taiLaiSanPham() {
+                $('#sanpham').empty();
+                $.get("http://localhost:3000/sanpham", function(duLieu, trangThai) {
+                    for (var i = 0; i < duLieu.length; i++) {
+                        var sanPhamHTML = `
+                            <div class="col-md-4">
+                                <div class="product-card">
+                                    <img src="${duLieu[i].anh}" alt="${duLieu[i].ten}">
+                                    <h4>${duLieu[i].ten}</h4>
+                                    <p>${duLieu[i].mota}</p>
+                                    <p>Giá: ${duLieu[i].gia.toLocaleString()} VND</p>
+                                    <p>Thương hiệu: ${duLieu[i].thuonghieu}</p>
+                                    <p>Đánh giá: ${duLieu[i].danhgia} sao (${duLieu[i].numReviews.toLocaleString()} đánh giá)</p>
+                                    <button class="btn btn-danger btn-sua" data-id="${duLieu[i].id}">Sửa</button>
+                                    <button class="btn btn-danger btn-xoa" data-id="${duLieu[i].id}">Xóa</button>
+                                </div>
+                            </div>`;
+                        $('#sanpham').append(sanPhamHTML);
+                    }
+                });
+            }
+
+            function moModal() {
+                $('#sanphamId').val('');  
+                $('#ten').val('');        
+                $('#mota').val('');
+$('#gia').val('');       
+                $('#thuonghieu').val('');
+                $('#danhgia').val('');    
+                $('#numReviews').val(''); 
+                $('#anh').val('');        
+                $('#sanphamModal').modal('show');
+            }
+
+            $('#sanpham').on('click', '.btn-xoa', function() {
+                var id = $(this).data('id');
+                if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+                    $.ajax({
+                        url: 'http://localhost:3000/sanpham/' + id,
+                        type: 'DELETE',
+                        success: function(result) {
+                            alert('Sản phẩm đã được xóa.');
+                            taiLaiSanPham();
+                        }
+                    });
+                }
+            });
+
+            $('#sanpham').on('click', '.btn-sua', function() {
+                var id = $(this).data('id');
+                suaSanPham(id);
+            });
+
+            function suaSanPham(id) {
+                $.get("http://localhost:3000/sanpham/" + id, function(duLieu, trangThai) {
+                    $('#sanphamId').val(id);
+                    $('#ten').val(duLieu.ten);
+                    $('#mota').val(duLieu.mota);
+                    $('#gia').val(duLieu.gia);
+                    $('#thuonghieu').val(duLieu.thuonghieu);
+                    $('#danhgia').val(duLieu.danhgia);
+                    $('#numReviews').val(duLieu.numReviews);
+                    $('#anh').val(duLieu.anh);
+                    $('#sanphamModal').modal('show');
+                });
+            }
+
+            $('#sanphamForm').submit(function(event) {
+                event.preventDefault();
+                var sanphamId = $('#sanphamId').val();
+                var sanphamData = {
+                    ten: $('#ten').val(),
+                    mota: $('#mota').val(),
+                    gia: parseFloat($('#gia').val()),
+                    thuonghieu: $('#thuonghieu').val(),
+                    danhgia: parseFloat($('#danhgia').val()),
+                    numReviews: parseFloat($('#numReviews').val()),
+                    anh: $('#anh').val()
+                };
+
+                if (sanphamId) {
+                    $.ajax({
+                        url: 'http://localhost:3000/sanpham/' + sanphamId,
+                        type: 'PUT',
+                        contentType: 'application/json',
+                        data: JSON.stringify(sanphamData),
+                        success: function(result) {
+                            alert('Sản phẩm đã được cập nhật.');
+                            $('#sanphamModal').modal('hide');
+                            taiLaiSanPham();
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: 'http://localhost:3000/sanpham',
+                        type: 'POST',
+contentType: 'application/json',
+                        data: JSON.stringify(sanphamData),
+                        success: function(result) {
+                            alert('Sản phẩm đã được thêm.');
+                            $('#sanphamModal').modal('hide');
+                            taiLaiSanPham();
+                        }
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
