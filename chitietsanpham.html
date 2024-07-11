@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Chi Tiết Sản Phẩm</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            .product-detail {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: white;
+            }
+
+            .product-detail img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+            .product-info {
+                margin-top: 20px;
+            }
+
+            .product-info h2 {
+                margin-bottom: 20px;
+            }
+
+            .product-info p {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="chiTietSanPham" class="product-detail">
+                <img id="anhSanPham" src="" alt="Hình ảnh sản phẩm">
+                <div class="product-info">
+                    <h2 id="tenSanPham"></h2>
+                    <p id="giaSanPham"></p>
+                    <p id="thuongHieuSanPham"></p>
+                    <p id="moTaSanPham"></p>
+                    <p id="danhGiaSanPham"></p>
+                    <p id="soLuongDanhGiaSanPham"></p>
+                </div>
+            </div>
+            <div>
+                <a href="danhgia.html?id=1" class="btn btn-danhgia">Đánh giá</a>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                function layThamSoURL(ten) {
+                    let thamSoURL = new URLSearchParams(window.location.search);
+                    return thamSoURL.get(ten);
+                }
+
+                let sanPhamId = layThamSoURL('id');
+
+                $.get("http://localhost:3000/sanpham/" + sanPhamId, function(sanPham, trangThai) {
+                    if (trangThai === 'success') {
+                        $('#anhSanPham').attr('src', sanPham.anh);
+                        $('#tenSanPham').text(sanPham.ten);
+                        $('#giaSanPham').text('Giá: ' + sanPham.gia.toLocaleString() + ' VND');
+                        $('#thuongHieuSanPham').text('Thương hiệu: ' + sanPham.thuonghieu);
+                        $('#moTaSanPham').text('Mô tả: ' + sanPham.mota);
+                        let danhGiaTrungBinh = (sanPham.danhgia / sanPham.numReviews).toFixed(2);
+                        $('#danhGiaSanPham').text('Đánh giá: ' + danhGiaTrungBinh + ' sao');
+                        $('#soLuongDanhGiaSanPham').text('Số lượt đánh giá: ' + sanPham.numReviews.toLocaleString());
+                    } else {
+                        $('#chiTietSanPham').html('<p>Không tìm thấy sản phẩm.</p>');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
