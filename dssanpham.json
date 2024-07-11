@@ -1,0 +1,25 @@
+{
+  "sanpham": [
+    {
+      "id": "1",
+      "ten": "Điện thoại iPhone 13 Pro Max",
+      "anh": "https://cdn.tgdd.vn/Files/2021/08/26/1378012/apple-iphone-13-to-bring-potrait-mode-and-prores-for-videos_1280x634-800-resize.jpg",
+      "danhgia": 5,
+      "gia": 30000000,
+      "mota": "Điện thoại iPhone 13 Pro Max với chip A15 Bionic mạnh mẽ, camera sau 3 ống kính và màn hình Super Retina XDR tuyệt đẹp. iPhone 13 Pro Max tiếp tục thừa hưởng thiết kế đặc trưng với khung viền thép vuông vức và mặt lưng kính sang trọng. Tuy nhiên, phiên bản mới này đã có những cải tiến đáng chú ý. Đặc biệt, phần “tai thỏ” trên màn hình đã được thu gọn lại 20%, tạo ra nhiều không gian hơn để hiển thị và làm cho phần trước của điện thoại trở nên hấp dẫn hơn. iPhone 13 Pro Max đã thành công rực rỡ với đa dạng các tùy chọn màu sắc như Xanh lá, vàng Gold, Bạc, Xanh dương, Đen nhám. Các tùy chọn này đều thực sự tôn lên vẻ đẹp sang trọng đẳng cấp của Apple, thu hút người dùng. Dù đã ra mắt khá nhiều năm, nhưng hiện tại thiết kế iPhone 13 vẫn thực sự được đánh giá là một trong những mẫu iPhone đẹp của nhà Apple. Phone 13 Pro Max được trang bị một màn hình rộng lên đến 6.7 inch, kèm theo độ phân giải 1.284×2.778px. Sử dụng công nghệ tấm nền OLED và Super Retina XDR, màn hình này không chỉ tiết kiệm năng lượng mà còn mang lại khả năng hiển thị sắc nét, sống động và chân thực. Điều đặc biệt là màn hình của iPhone 13 Pro Max hỗ trợ tần số quét lên đến 120Hz. Tạo ra trải nghiệm vuốt chạm mượt mà và hiệu ứng thị giác tuyệt vời khi chơi game hoặc xem video. Ngoài ra, công nghệ ProMotion thông minh cũng được tích hợp trong iPhone 13 Pro Max. Tần số quét của màn hình có thể thay đổi từ 10 đến 120 lần mỗi giây tùy thuộc vào ứng dụng và thao tác đang sử dụng. Điều này giúp tối ưu hóa thời lượng pin và mang lại trải nghiệm tốt nhất cho người dùng.",
+      "thuonghieu": "Apple",
+      "numReviews": 12000000
+    },
+    {
+      "id": "2",
+      "ten": "Laptop Dell XPS 13",
+      "anh": "https://blogcdn.muaban.net/wp-content/uploads/2022/07/21120046/laptop-man-hinh-cam-ung-9.jpg",
+      "danhgia": 5,
+      "gia": 10000000,
+      "mota": "Hoạt động với 14 nhân 18 luồng, tốc độ tối đa lên đến 4.5Ghz GHz và bộ nhớ cache lớn 18MB laptop này đủ sức đáp ứng mọi nhu cầu công việc và giải trí của bạn một cách mượt mà và nhanh chóng. Dell là một hãng laptop của Mỹ, dòng laptop windows này được biết đến vì vô cùng bền bỉ cùng thời gian. Có thể nói dell chính là dòng máy văn phòng cao cấp, đáp ứng được đầy đủ các nhu cầu của người sử dụng. Ngoài ra, dòng laptop này còn có cấu hình cực đỉnh hoạt động mạnh mẽ nhất trong phân khúc tầm giá. Dell XPS 13 sử dụng bộ xử lý Intel Quad Core thế hệ 10 nên có nhiều lõi hơn nên hiệu năng làm việc cũng cao hơn rất nhiều. Kể cả khi bạn sử dụng rất nhiều ứng dụng cùng một lúc thì dòng máy Dell XPS 13 vẫn chạy vô cùng mượt mà. Bộ RAM của máy lên tới 16GB hoặc 32Gb mọi hoạt động trên máy đều xử lý mượt mà. ",
+      "thuonghieu": "Dell",
+      "rating": 4.8,
+      "numReviews": 300000
+    }
+  ]
+}
